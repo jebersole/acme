@@ -6,13 +6,9 @@ class DeliveryRules
 {
     private array $rules = [];
 
-    public function __construct()
+    public function __construct(array $rules)
     {
-        $this->rules = [
-            new DeliveryRule(0, 50, 4.95),
-            new DeliveryRule(50, 90, 2.95),
-            new DeliveryRule(90, INF, 0, '>=')
-        ];
+        $this->rules = $rules;
     }
 
     public function calculateDelivery(float $total): float

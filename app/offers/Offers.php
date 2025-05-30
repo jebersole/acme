@@ -6,11 +6,9 @@ class Offers
 {
     protected array $offers;
 
-    public function __construct()
+    public function __construct(array $offers = [])
     {
-        $this->offers = [
-            new RedHalfPriceOffer()
-        ];
+        $this->offers = $offers;
     }
 
     public function applyOffers(array $products): float
@@ -18,7 +16,8 @@ class Offers
         foreach ($products as &$product) {
             $product->resetPrice();
         }
-        $productsAfterOffers = $products; // Initialize with original products
+
+        $productsAfterOffers = $products;
         foreach ($this->offers as $offer) {
             if ($offer->isApplicableTo($products)) {
                 $productsAfterOffers = $offer->apply($productsAfterOffers);

@@ -6,7 +6,12 @@ use App\Widgets\Widget;
 
 class Catalog
 {
-    protected array $products = [];
+    protected array $products;
+
+    public function __construct(array $products)
+    {
+        $this->products = $products;
+    }
 
     public function getProducts(): array
     {

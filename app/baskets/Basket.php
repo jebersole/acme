@@ -2,18 +2,18 @@
 
 namespace App\Baskets;
 
-use App\Catalogs\WidgetCatalog;
+use App\Catalogs\Catalog;
 use App\DeliveryRules\DeliveryRules;
 use App\Offers\Offers;
 
 class Basket
 {
-    protected WidgetCatalog $catalog;
+    protected Catalog $catalog;
     protected DeliveryRules $deliveryRules;
     protected Offers $offers;
     protected array $products = [];
 
-    public function __construct(WidgetCatalog $catalog, DeliveryRules $deliveryRules, Offers $offers)
+    public function __construct(Catalog $catalog, DeliveryRules $deliveryRules, Offers $offers)
     {
         $this->catalog = $catalog;
         $this->deliveryRules = $deliveryRules;

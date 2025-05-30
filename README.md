@@ -19,7 +19,7 @@ This project is a PHP-based application that allows users to manage a basket of 
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:jebersole/acme.git
    cd acme
 
 ## Running Tests
@@ -37,20 +37,26 @@ This will:
 
 ## Example Usage
 
-Here is an example of how to use the `Basket` class without dependency injection:
+Here is an example of how to use the `Basket` class with dependency injection:
 
 ```php
+use DI\ContainerBuilder;
 use App\Baskets\Basket;
-use App\Catalogs\WidgetCatalog;
-use App\DeliveryRules\DeliveryRules;
-use App\Offers\Offers;
 
-$catalog = new WidgetCatalog();
-$deliveryRules = new DeliveryRules();
-$offers = new Offers();
+require_once __DIR__ . '/vendor/autoload.php';
 
-$basket = new Basket($catalog, $deliveryRules, $offers);
+// Set up the dependency injection container
+$containerBuilder = new ContainerBuilder();
+$container = $containerBuilder->build();
+
+// Resolve the Basket class with its dependencies
+$basket = $container->get(Basket::class);
+
+// Add products to the basket
 $basket->addProductByCode('B01');
+$basket->addProductByCode('R02');
+
+// Get the total price
 echo $basket->getTotalPrice();
 ```
 
