@@ -2,6 +2,7 @@
 
 namespace App\Offers;
 
+use App\Widgets\Widget;
 use App\Widgets\RedWidget;
 
 /**
@@ -22,6 +23,9 @@ class RedHalfPriceOffer implements Offer
         return $redCount > 1;
     }
 
+    /**
+     * @param array<Widget> $products
+     */
     public function apply(array $products): array
     {
         $seenRed = false;

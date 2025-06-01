@@ -4,10 +4,6 @@ namespace App\Widgets;
 
 class RedWidget extends Widget
 {
-    public function __construct()
-    {
-        $this->price = 32.95;
-        $this->code = 'R01';
-        parent::__construct();
-    }
+    protected float $price = 32.95;
+    protected string $code = 'R01';
 }

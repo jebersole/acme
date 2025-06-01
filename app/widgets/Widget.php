@@ -2,6 +2,8 @@
 
 namespace App\Widgets;
 
+use LogicException;
+
 class Widget
 {
     protected float $originalPrice;
@@ -11,6 +13,9 @@ class Widget
 
     public function __construct()
     {
+        if (!isset($this->price, $this->code)) {
+            throw new LogicException("Widget price and code must be set.");
+        }
         $this->originalPrice = $this->price;
         $this->id = uniqid();
     }

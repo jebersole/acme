@@ -22,6 +22,14 @@ This project is a PHP-based application that allows users to manage a basket of 
    git clone git@github.com:jebersole/acme.git
    cd acme
 
+## Project Structure
+
+- `app/`: Contains the application code.
+- `tests/`: Contains the PHPUnit test cases.
+- `docker-compose.yml`: Configuration for Docker containers.
+- `Makefile`: Simplifies running commands like testing.
+- `composer.json`: Manages PHP dependencies.
+
 ## Running Tests
 
 To run the tests, use the `make test` command from the command line:
@@ -92,10 +100,17 @@ The following test cases are included in the project:
 - Adds two `BlueWidget` products and three `RedWidget` products to the basket.
 - Verifies the total price.
 
-## Project Structure
+## Running Static Analysis with PHPStan
 
-- `app/`: Contains the application code.
-- `tests/`: Contains the PHPUnit test cases.
-- `docker-compose.yml`: Configuration for Docker containers.
-- `Makefile`: Simplifies running commands like testing.
-- `composer.json`: Manages PHP dependencies.
+To run static analysis on the codebase using PHPStan, use the following command:
+
+```bash
+make phpstan
+```
+
+This will:
+1. Start the Docker containers.
+2. Execute PHPStan inside the `php_app` container with the highest analysis level (`--level=max`).
+3. Stop and remove the containers after the analysis is complete.
+
+PHPStan helps identify potential bugs and ensures code quality by performing static analysis on the codebase.

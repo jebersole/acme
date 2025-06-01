@@ -2,49 +2,31 @@
 
 namespace App\DeliveryRules;
 
+use LogicException;
+
 /**
  * Class DeliveryRule
  * Represents a delivery rule with a cost based on the current basket total.
  * This cost is determined with an operator in relation to the min or max value of the rule,
  * provided the cost falls within the range.
  */
-class DeliveryRule
+abstract class DeliveryRule
 {
-    private float $min;
-    private float $max;
-    private float $deliveryCost;
-    private string $operator;
+    protected float $min;
+    protected float $max;
+    protected float $deliveryCost;
 
-    public function __construct(float $min, float $max, float $deliveryCost, string $operator = '<')
+    abstract public function isApplicableTo(float $total): bool;
+
+    final public function __construct()
     {
-        $this->min = $min;
-        $this->max = $max;
-        $this->deliveryCost = $deliveryCost;
-        $this->operator = $operator;
+        if (!isset($this->min, $this->max, $this->deliveryCost)) {
+            throw new LogicException("Delivery rule properties must be set.");
+        }
     }
 
     public function getCost(): float
     {
         return $this->deliveryCost;
-    }
-
-    public function match(float $total): bool
-    {
-        if ($total < $this->min || $total > $this->max) {
-            return false;
-        }
-
-        switch ($this->operator) {
-            case '<':
-                return $total < $this->max;
-            case '<=':
-                return $total <= $this->max;
-            case '>':
-                return $total > $this->max;
-            case '>=':
-                return $total >= $this->min;
-            default:
-                return false;
-        }
     }
 }

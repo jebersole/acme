@@ -5,13 +5,17 @@ namespace App\Baskets;
 use App\Catalogs\Catalog;
 use App\DeliveryRules\DeliveryRules;
 use App\Offers\Offers;
+use App\Widgets\Widget;
 
 class Basket
 {
+    /**
+     * @var array<Widget> $products
+     */
+    protected array $products = [];
     protected Catalog $catalog;
     protected DeliveryRules $deliveryRules;
     protected Offers $offers;
-    protected array $products = [];
 
     public function __construct(Catalog $catalog, DeliveryRules $deliveryRules, Offers $offers)
     {
@@ -25,6 +29,9 @@ class Basket
         $this->products[] = $this->catalog->createProductByCode($productCode);
     }
 
+    /**
+     * @return array<Widget> $products
+     */
     public function getProducts(): array
     {
         return $this->products;
